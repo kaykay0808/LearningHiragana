@@ -1,0 +1,2 @@
+rootProject.name = "LearningHiragana"
+include ':app'
