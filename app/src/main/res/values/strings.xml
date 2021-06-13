@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">LearningHiragana</string>
+    <string name="app_title">HiraganaQuiz!</string>
+    <string name="welcome">WELCOME</string>
+    <string name="please_enter_your_name">Please enter your name</string>
 </resources>

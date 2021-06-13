@@ -7,4 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <!-- My color resources -->
+    <color name="welcome">#363A43</color>
+    <color name="please_enter_your_name">#7A8089</color>
 </resources>
