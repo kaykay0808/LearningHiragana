@@ -3,4 +3,6 @@
     <string name="app_title">HiraganaQuiz!</string>
     <string name="welcome">WELCOME</string>
     <string name="please_enter_your_name">Please enter your name</string>
+    <string name="start_button">Start</string>
+    <string name="hint">Name</string>
 </resources>
