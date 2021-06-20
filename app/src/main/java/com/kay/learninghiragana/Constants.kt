@@ -7,7 +7,72 @@ object Constants{
     fun getQuestions(): ArrayList<Question>{
         val questionsList = ArrayList<Question>()
 
-        val que1 = Question(1, "What symbol is this?", R.drawable.a_hiragana)
+        // 1
+        val que1 = Question(
+            1,
+            "What symbol is this?",
+            R.drawable.a_hiragana,
+            "A",
+            "I",
+            "U",
+            "E",
+            1
+        )
+        questionsList.add(que1)
+
+        // 2
+        val que2 = Question(
+            2,
+            "What symbol is this?",
+            R.drawable.i_hiragana,
+            "A",
+            "I",
+            "U",
+            "E",
+            2
+        )
+        questionsList.add(que2)
+
+        // 3
+        val que3 = Question(
+            3,
+            "What symbol is this?",
+            R.drawable.i_hiragana,
+            "A",
+            "I",
+            "U",
+            "E",
+            2
+        )
+        questionsList.add(que3)
+
+        // 4
+        val que4 = Question(
+            4,
+            "What symbol is this?",
+            R.drawable.i_hiragana,
+            "A",
+            "I",
+            "U",
+            "E",
+            2
+        )
+        questionsList.add(que4)
+
+        // 5
+        val que5 = Question(
+            5,
+            "What symbol is this?",
+            R.drawable.i_hiragana,
+            "A",
+            "I",
+            "U",
+            "E",
+            2
+        )
+        questionsList.add(que5)
+
+        return questionsList
     }
 
 }

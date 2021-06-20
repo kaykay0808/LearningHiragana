@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/welcome"
-                android:textColor="@color/welcome"
+                android:textColor="@color/Darker_grey"
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
@@ -49,7 +49,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/please_enter_your_name"
-                android:textColor="@color/please_enter_your_name"
+                android:textColor="@color/Lighter_grey"
                 android:textSize="16sp" />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -63,8 +63,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint"
-                    android:textColor="@color/welcome"
-                    android:textColorHint="@color/please_enter_your_name" />
+                    android:textColor="@color/Darker_grey"
+                    android:textColorHint="@color/Lighter_grey" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

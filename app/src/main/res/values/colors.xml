@@ -8,6 +8,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <!-- My color resources -->
-    <color name="welcome">#363A43</color>
-    <color name="please_enter_your_name">#7A8089</color>
+    <color name="Darker_grey">#363A43</color>
+    <color name="Lighter_grey">#7A8089</color>
+    <!-- My own primary color-->
+    <color name="color_primary">#9013FE</color>
+    <color name="color_primary_dark">#6A1B9A</color>
 </resources>
