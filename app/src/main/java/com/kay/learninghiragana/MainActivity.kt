@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // TODO (validate name is entered or not and launch the QuizQuestion Activity, with a toast)
+        // (validate name is entered or not and launch the QuizQuestion Activity, with a toast)
 
         binding.btnStart.setOnClickListener {
             // Check if the edit text (ET) field is empty
@@ -34,9 +34,5 @@ class MainActivity : AppCompatActivity() {
 
             }
         }
-
-
-
-
     }
 }

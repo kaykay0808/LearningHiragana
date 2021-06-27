@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.kay.learninghiragana.databinding.ActivityMainBinding
 import com.kay.learninghiragana.databinding.ActivityQuizQuestionsBinding
@@ -39,42 +40,102 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
         binding.tvOptionTwo.setOnClickListener(this)
         binding.tvOptionThree.setOnClickListener(this)
         binding.tvOptionFour.setOnClickListener(this)
+        binding.btnSubmit.setOnClickListener(this)
 
     }
+
+    // This function is highlighting the selected option.
     override fun onClick(v: View?) {
-        when(v?.id){
-            R.id.tv_option_one ->{
+        when (v?.id) {
+            R.id.tv_option_one -> {
                 selectedOptionView(binding.tvOptionOne, 1)
             }
-            R.id.tv_option_two ->{
+            R.id.tv_option_two -> {
                 selectedOptionView(binding.tvOptionTwo, 2)
             }
-            R.id.tv_option_three ->{
+            R.id.tv_option_three -> {
                 selectedOptionView(binding.tvOptionThree, 3)
             }
-            R.id.tv_option_four ->{
+            R.id.tv_option_four -> {
                 selectedOptionView(binding.tvOptionFour, 4)
+            }
+            R.id.btn_submit -> {
+                // if the selected position is 0 (that means you have not choose anything
+                if (mSelectedOptionPosition == 0) {
+                    mCurrentPosition++
+
+                    when {
+                        // when question number is lesser or equal to total question size.
+                        mCurrentPosition <= mQuestionsList!!.size -> {
+                            setQuestion() // This will go to the next question
+                        }
+                        else -> {
+                            Toast.makeText(
+                                this,
+                                "You have succsessfully completed the quiz",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                }else{
+                    // if the user have selected an option
+                    val question = mQuestionsList?.get(mCurrentPosition -1)
+                    // if we selected the wrong option
+                    if(question!!.correctAnswer != mSelectedOptionPosition){
+                        answerView(mSelectedOptionPosition, R.drawable.wrong_option_border_bg)
+                    }
+                    answerView(question.correctAnswer, R.drawable.correct_option_border_bg)
+
+                    // check if we are on the last question
+                    if(mCurrentPosition == mQuestionsList!!.size){
+                        binding.btnSubmit.text = "FINISH"
+                    }else{
+                        binding.btnSubmit.text = "GO TO NEXT QUESTION"
+                    }
+                    // we need to asign this to go to the next question
+                    mSelectedOptionPosition = 0
+                }
             }
         }
     }
 
-    // (Create a function to set the question in the UI components which we have done earlier the onCreate method. And make some of the variables global which we will be using later.)
+    private fun answerView(answer: Int, drawableView: Int) {
+        when (answer) {
+            1 -> {
+                binding.tvOptionOne.background = ContextCompat.getDrawable(this, drawableView)
+            }
+            2 -> {
+                binding.tvOptionTwo.background = ContextCompat.getDrawable(this, drawableView)
+            }
+            3 -> {
+                binding.tvOptionThree.background = ContextCompat.getDrawable(this, drawableView)
+            }
+            4 -> {
+                binding.tvOptionFour.background = ContextCompat.getDrawable(this, drawableView)
+            }
+        }
+    }
+
+    // (Create a function to set the question in the UI components)
     // Function 2
     private fun setQuestion() {
         // (Setting the question in the UI from the list.)
-        mCurrentPosition = 1 // Default and the first question position
-        val question =
-            mQuestionsList!![mCurrentPosition - 1] // Getting the question from the list with the help of current position.
+
+        val question = mQuestionsList!![mCurrentPosition - 1] // Getting the question from the list with the help of current position.( The index always start in 0 that is why we have -1)
 
         // set everything to default before clicking the buttons
         defaultOptionsView()
 
-        binding.progressBar.progress =
-            mCurrentPosition // Setting the current progress in the progressbar using the position of question
-        binding.tvProgress.text =
-            "$mCurrentPosition" + "/" + binding.progressBar.max// Setting up the progress text
+        if(mCurrentPosition == mQuestionsList!!.size){
+            binding.btnSubmit.text = "FINISH"
+        }else{
+            binding.btnSubmit.text = "SUBMIT"
+        }
 
-        // Now set the current question and the options in the UI
+        binding.progressBar.progress = mCurrentPosition // Setting the current progress in the progressbar using the position of question
+        binding.tvProgress.text = "$mCurrentPosition / ${binding.progressBar.max}" // Setting up the progress text
+
+        // set the current question and the options in the UI
         binding.tvQuestion.text = question!!.question
         binding.ivImageQuestion.setImageResource(question.image)
 
@@ -84,8 +145,8 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
         binding.tvOptionFour.text = question.optionFour
     }
 
-    // TODO (Create a function for view for highlighting the selected option.)
-    private fun selectedOptionView(tv: TextView, selectedOptionNum: Int){
+    // (Create a function for view for highlighting the selected option.)
+    private fun selectedOptionView(tv: TextView, selectedOptionNum: Int) {
         defaultOptionsView()
         mSelectedOptionPosition = selectedOptionNum
 
@@ -107,9 +168,13 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
         // Create a for loop that go through all your options
         for (option in options) {
             // set the options to default color (The text color)
-            option.setTextColor(Color.parseColor("#7A8089"))
-            option.typeface = Typeface.DEFAULT // <-- set to default
-            option.background = ContextCompat.getDrawable(this, R.drawable.default_option_border_bg)
+            option.setTextColor(Color.parseColor("#7A8089")) // <-- set the text color to default
+            option.typeface =
+                Typeface.DEFAULT // <-- set to default // <-- set the typeFace to default (font, style, size)
+            option.background = ContextCompat.getDrawable(
+                this,
+                R.drawable.default_option_border_bg
+            ) // <-- set the default background
         }
     }
 }
