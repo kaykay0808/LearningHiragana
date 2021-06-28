@@ -24,7 +24,7 @@ object Constants{
         val que2 = Question(
             2,
             "What symbol is this?",
-            R.drawable.i_hiragana,
+            R.drawable.i_hirigana,
             "A",
             "I",
             "U",
@@ -37,12 +37,12 @@ object Constants{
         val que3 = Question(
             3,
             "What symbol is this?",
-            R.drawable.i_hiragana,
+            R.drawable.u_hiragana,
             "A",
             "I",
             "U",
             "E",
-            2
+            3
         )
         questionsList.add(que3)
 
@@ -50,12 +50,12 @@ object Constants{
         val que4 = Question(
             4,
             "What symbol is this?",
-            R.drawable.i_hiragana,
+            R.drawable.e_hiragana,
             "A",
-            "I",
+            "O",
             "U",
             "E",
-            2
+            4
         )
         questionsList.add(que4)
 
@@ -63,9 +63,9 @@ object Constants{
         val que5 = Question(
             5,
             "What symbol is this?",
-            R.drawable.i_hiragana,
+            R.drawable.o_hiragana,
             "A",
-            "I",
+            "O",
             "U",
             "E",
             2
