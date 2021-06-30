@@ -3,16 +3,12 @@ package com.kay.learninghiragana
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.kay.learninghiragana.databinding.ActivityMainBinding
 import com.kay.learninghiragana.databinding.ActivityQuizQuestionsBinding
-
 
 class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -45,7 +41,6 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
         binding.tvOptionThree.setOnClickListener(this)
         binding.tvOptionFour.setOnClickListener(this)
         binding.btnSubmit.setOnClickListener(this)
-
     }
 
     // This function is highlighting the selected option.
@@ -83,21 +78,21 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
                             finish()
                         }
                     }
-                }else{
+                } else {
                     // if the user have selected an option
-                    val question = mQuestionsList?.get(mCurrentPosition -1)
+                    val question = mQuestionsList?.get(mCurrentPosition - 1)
                     // if we selected the wrong option
-                    if(question!!.correctAnswer != mSelectedOptionPosition){
-                        answerView(mSelectedOptionPosition, R.drawable.wrong_option_border_bg)
-                    }else{
+                    if (question!!.correctAnswer != mSelectedOptionPosition) {
+                        highlightAnswer(mSelectedOptionPosition, R.drawable.wrong_option_border_bg)
+                    } else {
                         mCorrectAnswer++
                     }
-                    answerView(question.correctAnswer, R.drawable.correct_option_border_bg)
+                    highlightAnswer(question.correctAnswer, R.drawable.correct_option_border_bg)
 
                     // check if we are on the last question
-                    if(mCurrentPosition == mQuestionsList!!.size){
+                    if (mCurrentPosition == mQuestionsList!!.size) {
                         binding.btnSubmit.text = "FINISH"
-                    }else{
+                    } else {
                         binding.btnSubmit.text = "GO TO NEXT QUESTION"
                     }
                     // we need to asign this to go to the next question
@@ -108,20 +103,12 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     // A function for answer view which is used to highlight the answer is wrong or right.
-    private fun answerView(answer: Int, drawableView: Int) {
+    private fun highlightAnswer(answer: Int, drawableView: Int) {
         when (answer) {
-            1 -> {
-                binding.tvOptionOne.background = ContextCompat.getDrawable(this, drawableView)
-            }
-            2 -> {
-                binding.tvOptionTwo.background = ContextCompat.getDrawable(this, drawableView)
-            }
-            3 -> {
-                binding.tvOptionThree.background = ContextCompat.getDrawable(this, drawableView)
-            }
-            4 -> {
-                binding.tvOptionFour.background = ContextCompat.getDrawable(this, drawableView)
-            }
+            1 -> binding.tvOptionOne.background = ContextCompat.getDrawable(this, drawableView)
+            2 -> binding.tvOptionTwo.background = ContextCompat.getDrawable(this, drawableView)
+            3 -> binding.tvOptionThree.background = ContextCompat.getDrawable(this, drawableView)
+            4 -> binding.tvOptionFour.background = ContextCompat.getDrawable(this, drawableView)
         }
     }
 
@@ -135,11 +122,10 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
         // set everything to default before clicking the buttons
         defaultOptionsView()
 
-
         // Check here if the position of question is last, then change the button text of the button to finish.
-        if(mCurrentPosition == mQuestionsList!!.size){
+        if (mCurrentPosition == mQuestionsList!!.size) {
             binding.btnSubmit.text = "FINISH"
-        }else{
+        } else {
             binding.btnSubmit.text = "SUBMIT"
         }
 
@@ -162,7 +148,7 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
         mSelectedOptionPosition = selectedOptionNum
 
         tv.setTextColor(Color.parseColor("#363A43"))
-        tv.setTypeface(tv.typeface, Typeface.BOLD)// <-- set to default
+        tv.setTypeface(tv.typeface, Typeface.BOLD) // <-- set to default
         tv.background = ContextCompat.getDrawable(this, R.drawable.selected_option_border_bg)
     }
 

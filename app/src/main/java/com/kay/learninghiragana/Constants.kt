@@ -1,14 +1,14 @@
 package com.kay.learninghiragana
 
 // TODO (Create a Constants Object.)
-object Constants{
+object Constants {
 
     const val USER_NAME: String = "user_name"
     const val TOTAL_QUESTIONS: String = "total_question"
     const val CORRECT_ANSWERS: String = "correct_answers"
 
     // (Create a list of questions using the Question data model class. And add all the images to the drawable folder to add it in the list.)
-    fun getQuestions(): ArrayList<Question>{
+    fun getQuestions(): ArrayList<Question> {
         val questionsList = ArrayList<Question>()
 
         // 1
@@ -78,5 +78,4 @@ object Constants{
 
         return questionsList
     }
-
 }

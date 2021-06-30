@@ -1,10 +1,9 @@
 package com.kay.learninghiragana
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.WindowManager
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.kay.learninghiragana.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -20,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnStart.setOnClickListener {
             // Check if the edit text (ET) field is empty
-            if (binding.etName.toString().isEmpty()){
+            if (binding.etName.toString().isEmpty()) {
                 Toast.makeText(this, "Please enter your name", Toast.LENGTH_SHORT).show()
                 // If edit text is not empty then move to the next activity screen (QuizQuestionActivity).
             } else {
@@ -31,8 +30,6 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
                 // and we can close the current activity
                 finish()
-
-
             }
         }
     }
