@@ -1,5 +1,6 @@
 package com.kay.learninghiragana
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
@@ -19,9 +20,11 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
     private var mCurrentPosition: Int = 1
     private var mQuestionsList: ArrayList<Question>? = null
 
-
     // (A global variables for selected option.)
     private var mSelectedOptionPosition: Int = 0
+    // A variable for how many times we had the correct answer
+    private var mCorrectAnswer: Int = 0
+    private var mUserName: String? = null
 
     private lateinit var binding: ActivityQuizQuestionsBinding
 
@@ -30,6 +33,7 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
         binding = ActivityQuizQuestionsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        mUserName = intent.getStringExtra(Constants.USER_NAME) // <- getting the username that we stored
 
         mQuestionsList = Constants.getQuestions()
 
@@ -59,6 +63,7 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
             R.id.tv_option_four -> {
                 selectedOptionView(binding.tvOptionFour, 4)
             }
+            // Adding a click event for submit button, and change the questions and check the selected answers.
             R.id.btn_submit -> {
                 // if the selected position is 0 (that means you have not choose anything
                 if (mSelectedOptionPosition == 0) {
@@ -70,11 +75,12 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
                             setQuestion() // This will go to the next question
                         }
                         else -> {
-                            Toast.makeText(
-                                this,
-                                "You have succsessfully completed the quiz",
-                                Toast.LENGTH_SHORT
-                            ).show()
+                            val intent = Intent(this, ResultActivity::class.java)
+                            intent.putExtra(Constants.USER_NAME, mUserName)
+                            intent.putExtra(Constants.CORRECT_ANSWERS, mCorrectAnswer)
+                            intent.putExtra(Constants.TOTAL_QUESTIONS, mQuestionsList!!.size)
+                            startActivity(intent)
+                            finish()
                         }
                     }
                 }else{
@@ -83,6 +89,8 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
                     // if we selected the wrong option
                     if(question!!.correctAnswer != mSelectedOptionPosition){
                         answerView(mSelectedOptionPosition, R.drawable.wrong_option_border_bg)
+                    }else{
+                        mCorrectAnswer++
                     }
                     answerView(question.correctAnswer, R.drawable.correct_option_border_bg)
 
@@ -99,6 +107,7 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    // A function for answer view which is used to highlight the answer is wrong or right.
     private fun answerView(answer: Int, drawableView: Int) {
         when (answer) {
             1 -> {
@@ -126,6 +135,8 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
         // set everything to default before clicking the buttons
         defaultOptionsView()
 
+
+        // Check here if the position of question is last, then change the button text of the button to finish.
         if(mCurrentPosition == mQuestionsList!!.size){
             binding.btnSubmit.text = "FINISH"
         }else{

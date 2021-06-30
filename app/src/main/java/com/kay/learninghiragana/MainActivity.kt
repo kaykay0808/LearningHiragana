@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
             } else {
                 // Intent is a messaging object used to request an action -> Intent is used to start an Activity
                 val intent = Intent(this, QuizQuestionsActivity::class.java) // <- This means from this class (MainActivity) jumping over to QuizQuestionsActivity
+                intent.putExtra(Constants.USER_NAME, binding.etName.text.toString())
                 // this below will start the activity we just prepared
                 startActivity(intent)
                 // and we can close the current activity

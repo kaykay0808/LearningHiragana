@@ -6,4 +6,8 @@
     <string name="start_button">Start</string>
     <string name="hint">Name</string>
     <string name="submit">Submit</string>
+    <string name="result">Result</string>
+    <string name="hey_congratulation">Hey, Congratulation!</string>
+    <string name="username">Username</string>
+    <string name="finish">FINISH</string>
 </resources>
